@@ -1,0 +1,23 @@
+.home__wrapper {
+    background-image: url("../../assets/images/jourdain-new-home.jpg");
+    background-size:cover;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    /* margin-top: 61px; */
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+    align-content: center;
+}
+
+.vstack a {
+    border: 1px solid #fed4d4;
+    color: #fed4d4;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.vstack a:hover {
+    color: #c9ff41;
+    border-color: #c9ff41;
+}

@@ -1,0 +1,10 @@
+.card-link {
+    color: #ffffff;
+    text-decoration: none;
+}
+.card-link:hover {
+    cursor: pointer;
+}
+.tickets:hover .card-link {
+    color: #fc8a00;
+}

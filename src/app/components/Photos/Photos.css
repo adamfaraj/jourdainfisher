@@ -1,0 +1,10 @@
+.photo__item {
+    display: flex;
+    justify-content: center;
+}
+
+@media (min-width: 768px) {
+    img {
+        max-width: 440px;
+    }
+}

@@ -1,0 +1,38 @@
+.navbar {
+  /* background-color: rgba(0,0,0); */
+  color: #ffffff;
+  margin-bottom: 0;
+}
+
+.navbar-nav {
+  font-size: 1.3rem;
+  margin-left: 1rem;
+}
+
+.nav-link {
+  color: #fed4d4;
+  width: fit-content;
+}
+
+.navbar-dark .navbar-brand:hover {
+  cursor: pointer;
+  color:#fc8a00;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: #fed4d4
+}
+
+/* @media screen and (min-width: 992px) { */
+  .navbar-dark .navbar-nav .nav-link:hover {
+    color: #fc8a00;
+  }
+/* } */
+
+.navbar-brand a {
+  font-size: 2rem;
+}
+
+.navbar a {
+  color: #fed4d4 ;
+}

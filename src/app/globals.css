@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import url('https://fonts.googleapis.com/css2?family=Anton+SC&display=swap');
+
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --dark-text: #212529;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--dark-text);
+  background: var(--background);
+  font-family: 'Anton SC', sans-serif;
+  /* max-width: 1100px; */
+  /* margin: 0 auto; */
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
