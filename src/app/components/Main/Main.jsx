@@ -8,14 +8,14 @@ import Stack from 'react-bootstrap/Stack';
 
 
 import './Main.css';
-import Spotify from '../Spotify/Spotify';
+// import Spotify from '../Spotify/Spotify';
 
 export default function Main() {
         return (
             <div className="home__wrapper" id="home">
                 {/* <Spotify /> */}
                 <Stack gap={3} className='p-5 col-3'>
-                    <Link href="/tour" className='p-8'>
+                    <Link href="https://punchup.live/jourdainfisher" target='_blank' className='p-8'>
                         Tour
                     </Link>
                     <Link href="/media" className='p-8'>

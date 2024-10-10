@@ -5,7 +5,7 @@ import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
-import jf from '../../assets/images/IMG_3391.JPG';
+// import jf from '../../assets/images/IMG_3391.JPG';
 
 import './Shows.css';
 

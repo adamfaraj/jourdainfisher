@@ -57,11 +57,11 @@ export default function Navigation() {
   };
 
   const navList = [
-    { name: 'Tour', id: 'shows' },
-    { name: 'Media', id: 'media' },
-    // { name: 'Photos', id: 'photos' },
-    { name: 'About', id: 'about' },
-    { name: 'Contact', id: 'contact' }
+    { name: 'Tour', href: 'https://punchup.live/jourdainfisher' },
+    { name: 'Media', href: '/media' },
+    // { name: 'Photos', href: 'photos' },
+    { name: 'About', href: '/about' },
+    { name: 'Contact', href: '/contact' }
   ]
 
   const socialMedia = [
@@ -88,7 +88,13 @@ export default function Navigation() {
           <Nav className="me-auto">
               {navList.map((navItem, i) => {
                 return (
-                  <Nav.Link key={i} className="small text-nowrap" eventKey={i} href="" onClick={toSection.bind(this, navItem.id)}>
+                  <Nav.Link
+                    key={i}
+                    className="small text-nowrap"
+                    eventKey={i}
+                    href={navItem.href}
+                    target={navItem.name === "Tour" ? '_blank' : ''}
+                  >
                     {navItem.name}
                   </Nav.Link>
                 );

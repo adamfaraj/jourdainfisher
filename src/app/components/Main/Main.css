@@ -1,5 +1,5 @@
 .home__wrapper {
-    background-image: url("../../assets/images/jourdain-new-home.jpg");
+    background-image: url("https://d1o0ev2mj1bytm.cloudfront.net/images/main.jpg");
     background-size:cover;
     background-size: cover;
     background-position: center;
@@ -15,6 +15,7 @@
     color: #fed4d4;
     font-size: 1.5rem;
     text-align: center;
+    width: 10rem;
 }
 
 .vstack a:hover {

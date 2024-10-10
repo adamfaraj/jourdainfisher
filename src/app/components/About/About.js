@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 
 import './About.css';
-import logo from '../../assets/images/about.jpg';
+// import logo from '../../assets/images/about.jpg';
 
 export default function About() {
         return (
@@ -14,7 +14,7 @@ export default function About() {
                 <h1 className='text-center display-1'>About</h1>
                 <Row className="align-items-center text-white">
                     <Col lg={6}>
-                        <Image className="m-auto d-block" src="/src/app/assets/images/about.jpg" width={500} height={500} alt="about Jourdain" />
+                        {/* <Image className="m-auto d-block" src="/src/app/assets/images/about.jpg" width={500} height={500} alt="about Jourdain" /> */}
                     </Col>
                     <Col lg={6} className="about__text">
                         <p className='lh-lg'>

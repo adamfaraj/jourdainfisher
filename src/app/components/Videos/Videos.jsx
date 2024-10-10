@@ -1,53 +1,48 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
+import ReactPlayer from 'react-player'
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 import './Videos.css';
 
 export default function Videos() {
-    const videos = [
-        {
-            id: 1,
-            title: 'Jourdain Fisher Standup on Jimmy Fallon',
-            url: 'https://www.youtube.com/embed/Anm8cU7ZR8g'
-        },
-        {
-            id: 2,
-            title: 'Jourdain Fisher Standup on Comedy Central Stand Up',
-            url: 'https://www.youtube.com/embed/pD57sQ0X6QY'
-        },
-        // {
-        //     id: 3,
-        //     title: 'Jourdain Fisher 2017 Finalist StandUp NBC',
-        //     url: 'https://www.youtube.com/embed/cefXlJrz7c4'
-        // }
-    ]
-        return (
-            <div id="videos">
-                <h1 className="display-1 text-center text-white">Videos</h1>
-                {videos.map((video, i) => {
-                    return (
-                        <div key={i} className="videos__wrapper mt-3">
-                            <div className="videos__video">
-                                <iframe title={video.title} width="100%" height="100%" src={video.url} allowFullScreen allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
-                            </div>
-                        </div>
-                    );
-                })}
+    const [videos, setVideos] = useState([]);
 
-                {/* <div className="videos__wrapper">
-                    <div className="videos__video">
-                        <iframe title="Jourdain Fisher Standup on Jimmy Fallon" width="100%" height="100%" src="https://www.youtube.com/embed/Anm8cU7ZR8g" allowFullScreen allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
-                    </div>
-                </div>
-                <div className="videos__wrapper">
-                    <div className="videos__video">
-                        <iframe title="Jourdain Fisher Standup on Comedy Central Stand Up" width="100%" height="100%" src="https://www.youtube.com/embed/pD57sQ0X6QY" allowFullScreen allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
-                    </div>
-                </div>
-                <div className="videos__wrapper">
-                    <div className="videos__video">
-                        <iframe title="Jourdain Fisher 2017 Finalist StandUp NBC" width="100%" height="100%" src="https://www.youtube.com/embed/cefXlJrz7c4" allowFullScreen allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
-                    </div>
-                </div> */}
-            </div>
-        )
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await fetch('https://api.jourdainfisher.com/videos');
+            const data = await response.json();
+            console.log({ data })
+            setVideos(data);
+        }
+
+        fetchData();
+    }
+    , []);
+
+        return (
+        <div>
+            <h1 className="display-1 text-center text-white mt-5">Videos</h1>
+            <Container className="mt-4">
+                <Row className="justify-content-center">
+                    {videos.map((video, i) => (
+                        <Col key={i} xs={12} md={6} lg={6} className="mb-4">
+                            <div className="player-wrapper">
+                                <ReactPlayer
+                                    url={video.id} // Ensure 'video.id' contains the video URL
+                                    className="react-player"
+                                    width="100%"
+                                    height="100%"
+                                    controls
+                                />
+                            </div>
+                        </Col>
+                    ))}
+                </Row>
+            </Container>
+        </div>
+    );
     }

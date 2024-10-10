@@ -5,6 +5,6 @@
 
 @media (min-width: 768px) {
     img {
-        max-width: 440px;
+        /* max-width: 440px; */
     }
 }
