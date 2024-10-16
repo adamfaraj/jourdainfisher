@@ -1,12 +1,25 @@
+// src/app/components/Contact/Contact.jsx
+
 'use client';
 
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { Box, Link, Stack, Typography } from '@mui/material';
+import EmailListButton from '../EmailListButton/EmailListButton';
 import './Contact.css';
+import { ManagementContext } from '@/context/ManagementContext';
+import Alert from 'react-bootstrap/Alert';
+import Spinner from 'react-bootstrap/Spinner';
 
 export default function Contact() {
     const [validated, setValidated] = useState(false);
+    const [submitSuccess, setSubmitSuccess] = useState(false);
+    const [submitError, setSubmitError] = useState(false);
+    const [submitMessage, setSubmitMessage] = useState('');
+
+    const { managementContent, loading, error } = useContext(ManagementContext);
+    console.log({ managementContent, loading, error });
 
     const handleSubmit = (event) => {
         const form = event.currentTarget;
@@ -29,52 +42,79 @@ export default function Contact() {
                 },
                 body: JSON.stringify(formData),
             })
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(errData => {
+                            throw new Error(errData.message || 'Failed to submit the form.');
+                        });
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     form.reset();
                     form.classList.remove('was-validated');
                     setValidated(false);
-                    console.log('Success:', data)
+                    setSubmitSuccess(true);
+                    setSubmitError(false);
+                    setSubmitMessage('Your message has been sent successfully!');
+                    console.log('Success:', data);
                 })
                 .catch((error) => {
                     form.reset();
                     form.classList.remove('was-validated');
                     setValidated(false);
-                    console.error('Error:', error)
+                    setSubmitSuccess(false);
+                    setSubmitError(true);
+                    setSubmitMessage(error.message || 'Error submitting the form.');
+                    console.error('Error:', error);
                 });
-            
         }
         setValidated(true);
     };
+
+    // Utility function to capitalize each word in a string
+    const capitalize = (str) => {
+        if (!str) return '';
+        return str
+            .split(' ')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
+    };
+
     return (
         <div className="contact__wrapper" id="contact">
-            <h1>
+            <div className='my-4'>
+                <EmailListButton variant="h5" />
+            </div>
+            <Typography variant="h1">
                 Contact
-            </h1>
+            </Typography>
+
+            {/* Contact Form */}
             <Form noValidate validated={validated} onSubmit={handleSubmit} className="form">
                 <Form.Group className="mb-3" controlId="contactForm.email">
-                    <Form.Label>Email address</Form.Label>
+                    <Form.Label className='text-white'>Email address</Form.Label>
                     <Form.Control required type="email" placeholder="name@example.com" />
                     <Form.Control.Feedback type="invalid">
                         Please provide a valid email.
                     </Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="contactForm.firstName">
-                    <Form.Label>First Name</Form.Label>
-                    <Form.Control required type="text" placeholder="John"/>
+                    <Form.Label className='text-white'>First Name</Form.Label>
+                    <Form.Control required type="text" placeholder="John" />
                     <Form.Control.Feedback type="invalid">
                         Please provide a first name.
                     </Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="contactForm.lastName">
-                    <Form.Label>Last Name</Form.Label>
-                    <Form.Control required type="text" placeholder="Smith"/>
+                    <Form.Label className='text-white'>Last Name</Form.Label>
+                    <Form.Control required type="text" placeholder="Smith" />
                     <Form.Control.Feedback type="invalid">
                         Please provide a last name.
                     </Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="contactForm.message">
-                    <Form.Label>Message</Form.Label>
+                    <Form.Label className='text-white'>Message</Form.Label>
                     <Form.Control required as="textarea" rows={3} />
                     <Form.Control.Feedback type="invalid">
                         Please enter a message.
@@ -82,36 +122,65 @@ export default function Contact() {
                 </Form.Group>
                 <Button type="submit">Submit</Button>
             </Form>
-            <div className="contact__info">
-                <div>
-                    <h3>Management</h3>
-                    <h4>Allen McRae | Adam Segal</h4>
-                    <small>Authentic Talent and Literary Management</small>
-                    <p><a href="mailto:allen.mcrae@authenticm.com?cc=jourdainfisher@gmail.com">allen.mcrae@authenticm.com</a></p>
-                    <p><a href="mailto:adam.segal@authenticm.com?cc=jourdainfisher@gmail.com">adam.segal@authenticm.com</a></p>
-                </div>
 
-                <div>
-                    <h3>Film/TV</h3>
-                    <h4>Katie Edwards</h4>
-                    <small>Independent Artist Group</small>
-                    <p><a href="mailto:kedwards@independentartistgroup.com?cc=jourdainfisher@gmail.com" target="_blank" rel="noopener noreferrer">kedwards@independentartistgroup.com</a></p>
-                </div>
+            {/* Submission Feedback */}
+            {submitSuccess && (
+                <Alert variant="success" className="mt-3">
+                    {submitMessage}
+                </Alert>
+            )}
+            {submitError && (
+                <Alert variant="danger" className="mt-3">
+                    {submitMessage}
+                </Alert>
+            )}
 
-                <div>
-                    <h3>Touring</h3>
-                    <h4>Adam Radler</h4>
-                    <small>Independent Artist Group</small>
-                    <p><a href="mailto:aradler@independentartistgroup.com?cc=jourdainfisher@gmail.com" target="_blank" rel="noopener noreferrer">aradler@independentartistgroup.com</a></p>
-                </div>
-
-                <div>
-                    <h3>College Agent</h3>
-                    <h4>Chris Schuler</h4>
-                    <small>Bass-Schuler Entertainment</small>
-                    <p><a href="mailto:chris@bass-schuler.com?cc=jourdainfisher@gmail.com" target="_blank" rel="noopener noreferrer">chris@bass-schuler.com</a></p>
-                </div>
+            {/* Management Information */}
+            <div className="contact__info d-flex flex-column text-center mt-5">
+                {loading ? (
+                    <div className="d-flex align-items-center justify-content-center">
+                        <Spinner animation="border" role="status" className="me-2">
+                            <span className="sr-only">Loading...</span>
+                        </Spinner>
+                        <Typography variant="body1">Loading Management Information...</Typography>
+                    </div>
+                ) : error ? (
+                    <Alert variant="danger" className="mt-3">
+                        {error}
+                    </Alert>
+                ) : managementContent && Object.keys(managementContent).length > 0 ? (
+                    Object.keys(managementContent).map((managementType) => (
+                        <Box key={managementType} className="mb-5">
+                            <Typography variant="h3" >{managementType}</Typography>
+                            <Typography variant="h4" >
+                                {managementContent[managementType].agent
+                                    .map(agent => capitalize(agent))
+                                    .join(' | ')}
+                            </Typography>
+                            <Typography variant="body1" >
+                                {managementContent[managementType].agency}
+                            </Typography>
+                            <Stack direction="column" gap={1} className='d-flex align-items-center'>
+                                {managementContent[managementType].agent_contact.map(contact => (
+                                    <Link
+                                        key={contact}
+                                        href={`mailto:${contact}?cc=jourdainfisher@gmail.com`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        
+                                    >
+                                        {contact}
+                                    </Link>
+                                ))}
+                            </Stack>
+                        </Box>
+                    ))
+                ) : (
+                    <Typography variant="body1">
+                        No management information available.
+                    </Typography>
+                )}
             </div>
         </div>
-    )
+    );
 }

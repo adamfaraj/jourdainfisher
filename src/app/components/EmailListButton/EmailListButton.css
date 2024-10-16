@@ -1,0 +1,11 @@
+.email-list-container a.MuiLink-root {
+  background-color: #ffa8a8;
+  border-radius: 5px;
+  color: black;
+  transition: all 0.15s ease-in-out;
+}
+
+.email-list-container a.MuiLink-root:hover {
+  background-color: black;
+  color: #ffa8a8;
+}

@@ -5,49 +5,46 @@ import React, { useEffect, useRef } from 'react';
 import throttle from 'lodash.throttle';
 import { Box, Link, Typography } from '@mui/material';
 import { Stack } from 'react-bootstrap';
-import Videos from '../components/Videos/Videos';
-import Photos from '../components/Photos/Photos';
+import Contact from '../components/Contact/Contact';
+import EmailListButton from '../components/EmailListButton/EmailListButton';
 import ParallaxImage from '../components/ParallaxImage/ParallaxImage';
 
 export default function Page() {
   const parallaxRef = useRef(null);
-  const animationFrame = useRef(null);
 
   useEffect(() => {
     const handleScroll = throttle(() => {
-      if (animationFrame.current) {
-        cancelAnimationFrame(animationFrame.current);
+      const scrollTop = window.scrollY;
+      if (parallaxRef.current) {
+        parallaxRef.current.style.transform = `translateY(${scrollTop * 0.5}px)`;
       }
-      animationFrame.current = requestAnimationFrame(() => {
-        const scrollTop = window.pageYOffset;
-        if (parallaxRef.current) {
-          parallaxRef.current.style.transform = `translateY(${scrollTop * 0.5}px)`;
-        }
-      });
     }, 16); // Approximately 60fps
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
       window.removeEventListener('scroll', handleScroll);
       handleScroll.cancel(); // Cancel any pending throttled calls
-      if (animationFrame.current) {
-        cancelAnimationFrame(animationFrame.current);
-      }
     };
   }, []);
 
   return (
-    <div className='videos-container'>
+    <div className='contact-container'>
       {/* Parallax Image Section */}
       <ParallaxImage
-        src="https://d1o0ev2mj1bytm.cloudfront.net/images/media.jpg"
+        src="https://d1o0ev2mj1bytm.cloudfront.net/images/contact.png"
         height="425px"
         objectPosition="top"
         speed={0.5} // Adjust the speed as needed
         alt="Jourdain Fisher performing on stage"
       />
-      <Videos />
-      <Photos />
+      {/* <div className="parallax-section">
+        <img
+          ref={parallaxRef}
+          src="https://d1o0ev2mj1bytm.cloudfront.net/images/contact.png"
+          alt="Jourdain Fisher"
+          className="parallax-image"
+        />
+      </div> */}
+      <Contact />
     </div>
-  );
-}
+  )}

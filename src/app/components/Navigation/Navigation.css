@@ -1,3 +1,6 @@
+nav {
+  z-index: 1;
+}
 .navbar {
   /* background-color: rgba(0,0,0); */
   color: #ffffff;
@@ -34,7 +37,8 @@
 }
 
 .navbar a {
-  color: #fed4d4 ;
+  /* color: #fed4d4; */
+  color: #ffa8a8;
 }
 
 .navbar a:hover {

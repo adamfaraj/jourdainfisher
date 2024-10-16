@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation';
+import { Form } from 'react-bootstrap';
+import { Button, Typography } from '@mui/material';
 
 
 export default function Page() {
@@ -35,13 +37,13 @@ export default function Page() {
 
   return (
     <div className="container mt-5">
-      <h1>Admin Login</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label">
+      <Typography variant="h3" className="text-white">Admin Login</Typography>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="text-white mb-3">
+          <Form.Label htmlFor="password" className="form-label">
             Password
-          </label>
-          <input
+          </Form.Label>
+          <Form.Control
             type="password"
             className="form-control"
             id="password"
@@ -49,12 +51,12 @@ export default function Page() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </div>
+          <Button type="submit" className="btn btn-primary">
+            Login
+          </Button>
+        </Form.Group>
+      </Form>
         {error && <p className="text-danger">{error}</p>}
-        <button type="submit" className="btn btn-primary">
-          Login
-        </button>
-      </form>
     </div>
   );
 }

@@ -12,40 +12,41 @@ import { FaSpotify } from "react-icons/fa6";
 
 
 import './Navigation.css';
+import EmailListButton from '../EmailListButton/EmailListButton';
 
 export default function Navigation() {
   const [show, setShow] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
-  useEffect(() => {
-    const controlNavbar = () => {
-      if (typeof window !== 'undefined') {
-        const currentScrollY = window.scrollY;
+  // useEffect(() => {
+  //   const controlNavbar = () => {
+  //     if (typeof window !== 'undefined') {
+  //       const currentScrollY = window.scrollY;
 
-        // If it's at the top of the page, always show the navbar
-        if (currentScrollY <= 0) {
-          setShow(true);
-        } else if (currentScrollY > lastScrollY) {
-          // If scrolling down, hide the navbar
-          setShow(false);
-        } else {
-          // If scrolling up, show the navbar
-          setShow(true);
-        }
+  //       // If it's at the top of the page, always show the navbar
+  //       if (currentScrollY <= 0) {
+  //         setShow(true);
+  //       } else if (currentScrollY > lastScrollY) {
+  //         // If scrolling down, hide the navbar
+  //         setShow(false);
+  //       } else {
+  //         // If scrolling up, show the navbar
+  //         setShow(true);
+  //       }
 
-        // Update the last scroll position
-        setLastScrollY(currentScrollY);
-      }
-    };
-    if (typeof window !== 'undefined') {
-      window.addEventListener('scroll', controlNavbar);
+  //       // Update the last scroll position
+  //       setLastScrollY(currentScrollY);
+  //     }
+  //   };
+  //   if (typeof window !== 'undefined') {
+  //     window.addEventListener('scroll', controlNavbar);
 
-      // cleanup function to remove the event listener
-      return () => {
-        window.removeEventListener('scroll', controlNavbar);
-      };
-    }
-  }, [lastScrollY]);
+  //     // cleanup function to remove the event listener
+  //     return () => {
+  //       window.removeEventListener('scroll', controlNavbar);
+  //     };
+  //   }
+  // }, [lastScrollY]);
 
   const toSection = (section) => {
     const sectionId = document.getElementById(section);
@@ -74,7 +75,7 @@ export default function Navigation() {
   ]
 
   return (
-    <Navbar collapseOnSelect expand="lg" fixed="top" style={{ transition: 'top 0.3s', top: show ? '0' : '-65px' }}>
+    <Navbar collapseOnSelect expand="lg" style={{ transition: 'top 0.3s', top: show ? '0' : '-65px' }}>
       <Container>
         <Navbar.Brand
           // onClick={scrollToTop}
@@ -99,6 +100,7 @@ export default function Navigation() {
                   </Nav.Link>
                 );
               })}
+              {/* <EmailListButton variant="body2" /> */}
           </Nav>
           <Nav className='d-flex flex-row gap-3 navbar-nav'>
             {socialMedia.map((social, i) => {

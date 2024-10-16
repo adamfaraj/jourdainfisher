@@ -2,6 +2,8 @@
 import { Anton } from 'next/font/google'
 import "./globals.css";
 import Navigation from "./components/Navigation/Navigation";
+import { AboutProvider } from '@/context/AboutContext';
+import { ManagementProvider } from '@/context/ManagementContext';
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -32,7 +34,11 @@ export default function RootLayout({ children }) {
         className={anton.className}
       >
         <Navigation />
-        {children}
+        <AboutProvider>
+          <ManagementProvider>
+            {children}
+          </ManagementProvider>
+        </AboutProvider>
       </body>
     </html>
   );
