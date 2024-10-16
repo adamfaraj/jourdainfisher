@@ -15,7 +15,7 @@ export default function Page() {
     e.preventDefault();
     console.log({ e, password })
 
-    const res = await fetch('/api/validate-password', {
+    const res = await fetch('../api/validate-password', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
