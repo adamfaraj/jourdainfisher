@@ -7,6 +7,7 @@ export async function POST(request) {
 
     // Retrieve the admin password from environment variables
     const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+    console.log({ password, ADMIN_PASSWORD });
 
     console.log({ password, ADMIN_PASSWORD });
     // Validate the password
