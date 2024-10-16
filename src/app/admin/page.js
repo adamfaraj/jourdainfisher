@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useRouter } from 'next/navigation';
 import { Form } from 'react-bootstrap';
 import { Button, Typography } from '@mui/material';
@@ -8,7 +8,6 @@ import { Button, Typography } from '@mui/material';
 
 export default function Page() {
   const router = useRouter();
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
