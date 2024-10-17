@@ -1,14 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import React, { useState, useEffect } from 'react';
-import { Navbar, Nav, Container } from 'react-bootstrap';
-import { FaInstagram } from "react-icons/fa6";
-import { FaTiktok } from "react-icons/fa6";
-import { FaXTwitter } from "react-icons/fa6";
-import { FaFacebookF } from "react-icons/fa6";
-import { FaYoutube } from "react-icons/fa6";
-import { FaSpotify } from "react-icons/fa6";
+import React, { useState } from 'react';
+import { Navbar, Nav, Container, Offcanvas } from 'react-bootstrap';
+import { FaInstagram, FaTiktok, FaXTwitter, FaFacebookF, FaYoutube, FaSpotify } from "react-icons/fa6";
 
 
 import './Navigation.css';
@@ -16,37 +11,6 @@ import EmailListButton from '../EmailListButton/EmailListButton';
 
 export default function Navigation() {
   const [show, setShow] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-
-  // useEffect(() => {
-  //   const controlNavbar = () => {
-  //     if (typeof window !== 'undefined') {
-  //       const currentScrollY = window.scrollY;
-
-  //       // If it's at the top of the page, always show the navbar
-  //       if (currentScrollY <= 0) {
-  //         setShow(true);
-  //       } else if (currentScrollY > lastScrollY) {
-  //         // If scrolling down, hide the navbar
-  //         setShow(false);
-  //       } else {
-  //         // If scrolling up, show the navbar
-  //         setShow(true);
-  //       }
-
-  //       // Update the last scroll position
-  //       setLastScrollY(currentScrollY);
-  //     }
-  //   };
-  //   if (typeof window !== 'undefined') {
-  //     window.addEventListener('scroll', controlNavbar);
-
-  //     // cleanup function to remove the event listener
-  //     return () => {
-  //       window.removeEventListener('scroll', controlNavbar);
-  //     };
-  //   }
-  // }, [lastScrollY]);
 
   const toSection = (section) => {
     const sectionId = document.getElementById(section);
@@ -85,33 +49,44 @@ export default function Navigation() {
           </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
-              {navList.map((navItem, i) => {
-                return (
-                  <Nav.Link
-                    key={i}
-                    className="small text-nowrap"
-                    eventKey={i}
-                    href={navItem.href}
-                    target={navItem.name === "Tour" ? '_blank' : ''}
-                  >
-                    {navItem.name}
-                  </Nav.Link>
-                );
-              })}
-              {/* <EmailListButton variant="body2" /> */}
-          </Nav>
-          <Nav className='d-flex flex-row gap-3 navbar-nav'>
-            {socialMedia.map((social, i) => {
-              return (
-                  <Nav.Link key={i} className="" href={social.url} target="_blank">
-                    {social.icon}
-                  </Nav.Link>
-              )
-            })}
-          </Nav>
-        </Navbar.Collapse>
+        <Navbar.Offcanvas
+          id={`offcanvasNavbar-expand-lg`}
+          aria-labelledby={`offcanvasNavbarLabel-expand-lg`}
+          placement="end"
+        >
+          <Offcanvas.Header closeButton>
+            <Offcanvas.Title id={`offcanvasNavbarLabel-expand-lg`}>
+              <Link href="/">
+                Jourdain Fisher
+              </Link>
+            </Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body>
+            <Nav className="justify-content-end flex-grow-1 pe-3">
+              {navList.map((navItem, i) => (
+                <Nav.Link
+                  key={i}
+                  as={Link}
+                  href={navItem.href}
+                  target={navItem.name === "Tour" ? '_blank' : '_self'}
+                  className="text-uppercase"
+                >
+                  {navItem.name}
+                </Nav.Link>
+              ))}
+              {/* Optional: Include EmailListButton inside Offcanvas */}
+              {/* <EmailListButton variant="outline-primary" className="mt-3" /> */}
+            </Nav>
+            <hr />
+            <Nav className="d-flex flex-row gap-3 mt-3">
+              {socialMedia.map((social, i) => (
+                <Nav.Link key={i} href={social.url} target="_blank" aria-label={social.name}>
+                  {social.icon}
+                </Nav.Link>
+              ))}
+            </Nav>
+          </Offcanvas.Body>
+        </Navbar.Offcanvas>
       </Container>
     </Navbar>
   )
