@@ -149,32 +149,37 @@ export default function Contact() {
                         {error}
                     </Alert>
                 ) : managementContent && Object.keys(managementContent).length > 0 ? (
-                    Object.keys(managementContent).map((managementType) => (
-                        <Box key={managementType} className="mb-5">
-                            <Typography variant="h3" >{managementType}</Typography>
-                            <Typography variant="h4" >
-                                {managementContent[managementType].agent
-                                    .map(agent => capitalize(agent))
-                                    .join(' | ')}
-                            </Typography>
-                            <Typography variant="body1" >
-                                {managementContent[managementType].agency}
-                            </Typography>
-                            <Stack direction="column" gap={1} className='d-flex align-items-center'>
-                                {managementContent[managementType].agent_contact.map(contact => (
-                                    <Link
-                                        key={contact}
-                                        href={`mailto:${contact}?cc=jourdainfisher@gmail.com`}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        
-                                    >
-                                        {contact}
-                                    </Link>
-                                ))}
-                            </Stack>
-                        </Box>
-                    ))
+                    Object.keys(managementContent).map((managementType) => {
+                        const { agent, agency, agent_contact } = managementContent[managementType];
+                    
+                        // Check if agent array is empty
+                        if (!agent || agent.length === 0) {
+                            return null; // Skip rendering this section
+                        }
+                    
+                        return (
+                            <Box key={managementType} className="mb-5">
+                                <Typography variant="h3">{managementType}</Typography>
+                                <Typography variant="h4">
+                                    {agent.map((agent) => capitalize(agent)).join(' | ')}
+                                </Typography>
+                                <Typography variant="body1">{agency}</Typography>
+                                <Stack direction="column" gap={1} className="d-flex align-items-center">
+                                    {agent_contact.map((contact) => (
+                                        <Link
+                                            key={contact}
+                                            href={`mailto:${contact}?cc=jourdainfisher@gmail.com`}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            {contact}
+                                        </Link>
+                                    ))}
+                                </Stack>
+                            </Box>
+                        );
+                    })
+                    
                 ) : (
                     <Typography variant="body1">
                         No management information available.

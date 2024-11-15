@@ -30,7 +30,21 @@ export const ManagementProvider = ({ children }) => {
 
             const data = await res.json();
             const parsedBody = JSON.parse(data.body); // Parse the stringified JSON
-            setManagementContent(parsedBody.content); // Set the entire content object
+
+            // Sorting logic
+            const customOrder = ['Management', 'Touring', 'College Agent', 'Film/TV'];
+            const orderedContent = Object.keys(parsedBody.content)
+            .sort((a, b) => {
+                const indexA = customOrder.indexOf(a);
+                const indexB = customOrder.indexOf(b);
+                return (indexA === -1 ? Infinity : indexA) - (indexB === -1 ? Infinity : indexB);
+            })
+            .reduce((acc, key) => {
+                acc[key] = parsedBody.content[key];
+                return acc;
+            }, {});
+
+            setManagementContent(orderedContent); // Set the entire content object
         } catch (err) {
             console.error('Failed to fetch management content:', err);
             setError(err.message || 'Failed to load Management content.');
