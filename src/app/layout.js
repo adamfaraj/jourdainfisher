@@ -1,20 +1,12 @@
-// import localFont from "next/font/local";
 import { Anton } from 'next/font/google'
 import "./globals.css";
 import Navigation from "./components/Navigation/Navigation";
 import { AboutProvider } from '@/context/AboutContext';
 import { ManagementProvider } from '@/context/ManagementContext';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import theme from './theme';
 
-// const geistSans = localFont({
-//   src: "./fonts/GeistVF.woff",
-//   variable: "--font-geist-sans",
-//   weight: "100 900",
-// });
-// const geistMono = localFont({
-//   src: "./fonts/GeistMonoVF.woff",
-//   variable: "--font-geist-mono",
-//   weight: "100 900",
-// });
 
 const anton = Anton({
   weight: "400",
@@ -30,15 +22,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={anton.className}
-      >
-        <Navigation />
-        <AboutProvider>
-          <ManagementProvider>
-            {children}
-          </ManagementProvider>
-        </AboutProvider>
+      <body className={anton.className}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Navigation />
+          <AboutProvider>
+            <ManagementProvider>
+              {children}
+            </ManagementProvider>
+          </AboutProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

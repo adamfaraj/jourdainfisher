@@ -5,6 +5,7 @@ import ReactPlayer from 'react-player'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Grid from '@mui/material/Grid2';
 
 import './Videos.css';
 
@@ -25,8 +26,8 @@ export default function Videos() {
 
         return (
         <div>
-            <h1 className="display-1 text-center text-white mt-5">Videos</h1>
-            <Container className="mt-4">
+            <h1 className="display-1 text-center mt-5">Videos</h1>
+            <Grid className="mt-4 p-3">
                 <Row className="justify-content-center">
                     {videos.map((video, i) => (
                         <Col key={i} xs={12} md={6} lg={6} className="mb-4">
@@ -42,7 +43,7 @@ export default function Videos() {
                         </Col>
                     ))}
                 </Row>
-            </Container>
+            </Grid>
         </div>
     );
     }

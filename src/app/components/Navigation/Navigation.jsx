@@ -1,30 +1,20 @@
 'use client';
 
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React from 'react';
 import { Navbar, Nav, Container, Offcanvas } from 'react-bootstrap';
 import { FaInstagram, FaTiktok, FaXTwitter, FaFacebookF, FaYoutube, FaSpotify } from "react-icons/fa6";
+import { usePathname } from 'next/navigation';
 
 
 import './Navigation.css';
-import EmailListButton from '../EmailListButton/EmailListButton';
 
 export default function Navigation() {
-  const [show, setShow] = useState(true);
-
-  const toSection = (section) => {
-    const sectionId = document.getElementById(section);
-    sectionId.scrollIntoView({ behavior: 'smooth' })
-  }
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to the top of the page smoothly
-  };
-
+  const pathname = usePathname();
+  const isAdmin = pathname.includes('/admin');
   const navList = [
     { name: 'Tour', href: 'https://punchup.live/jourdainfisher' },
     { name: 'Media', href: '/media' },
-    // { name: 'Photos', href: 'photos' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' }
   ]
@@ -39,11 +29,9 @@ export default function Navigation() {
   ]
 
   return (
-    <Navbar collapseOnSelect expand="lg" style={{ transition: 'top 0.3s', top: show ? '0' : '-65px' }}>
+    <Navbar collapseOnSelect expand="lg" className={isAdmin ? 'admin-nav' : ''}>
       <Container>
-        <Navbar.Brand
-          // onClick={scrollToTop}
-        >
+        <Navbar.Brand>
           <Link href="/">
             Jourdain Fisher
           </Link>
@@ -74,11 +62,9 @@ export default function Navigation() {
                   {navItem.name}
                 </Nav.Link>
               ))}
-              {/* Optional: Include EmailListButton inside Offcanvas */}
-              {/* <EmailListButton variant="outline-primary" className="mt-3" /> */}
             </Nav>
             <hr />
-            <Nav className="d-flex flex-row gap-3 mt-3">
+            <Nav className="d-flex flex-row gap-3 align-items-center">
               {socialMedia.map((social, i) => (
                 <Nav.Link key={i} href={social.url} target="_blank" aria-label={social.name}>
                   {social.icon}

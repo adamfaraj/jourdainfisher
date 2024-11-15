@@ -13,17 +13,12 @@ nav {
 }
 
 .nav-link {
-  color: #fed4d4;
   width: fit-content;
 }
 
 .navbar-dark .navbar-brand:hover {
   cursor: pointer;
   color:#fc8a00;
-}
-
-.navbar-dark .navbar-nav .nav-link {
-  color: #fed4d4
 }
 
 /* @media screen and (min-width: 992px) { */
@@ -37,7 +32,6 @@ nav {
 }
 
 .navbar a {
-  /* color: #fed4d4; */
   color: #ffa8a8;
 }
 
@@ -51,6 +45,10 @@ button.navbar-toggler {
 
 div.navbar-collapse {
   background-color: #fed4d4;
+}
+
+nav.admin-nav.navbar a {
+  color: black;
 }
 
 @media (min-width: 992px) {

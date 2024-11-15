@@ -1,6 +1,13 @@
 'use client';
 
 import { createTheme } from '@mui/material/styles';
+import { Anton } from 'next/font/google';
+
+const anton = Anton({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
 
 const theme = createTheme({
   typography: {
@@ -15,22 +22,35 @@ const theme = createTheme({
       fontWeight: 400,
       fontSize: '2.5rem',
     },
-    // You can customize other typography variants similarly
     button: {
       fontFamily: 'Anton, Arial, sans-serif',
-      textTransform: 'none', // Removes uppercase transformation
+      textTransform: 'none',
+    },
+  },
+  components: {
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          fontFamily: anton.style.fontFamily,
+        },
+      },
+    },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          fontFamily: anton.style.fontFamily,
+        },
+      },
     },
   },
   palette: {
     primary: {
-      main: '#1976d2', // Example primary color
+      main: '#1976d2',
     },
     secondary: {
-      main: '#dc004e', // Example secondary color
+      main: '#dc004e',
     },
-    // Add other palette settings as needed
   },
-  // Add other theme customizations if needed
 });
 
 export default theme;

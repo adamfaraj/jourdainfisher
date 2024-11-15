@@ -7,6 +7,7 @@ import { Box, Link, Typography } from '@mui/material';
 import { Stack } from 'react-bootstrap';
 import ParallaxImage from '../components/ParallaxImage/ParallaxImage';
 import { AboutContext } from '@/context/AboutContext';
+import EmailListButton from '../components/EmailListButton/EmailListButton';
 
 export default function Page() {
   const { aboutText } = useContext(AboutContext)
@@ -64,12 +65,15 @@ export default function Page() {
       </div> */}
 
       {/* Text Content Section */}
-      <div className="content-section text-white">
-        <Box className="about-content" sx={{ width: '100%', maxWidth: 800, margin: '0 auto', padding: '40px 20px' }}>
-          <Typography variant="body1" gutterBottom>
+      <div className="content-section">
+        <Box className="about-content" sx={{ width: '100%', maxWidth: 800, margin: '0 auto', padding: '40px 20px', fontSize: '2rem' }}>
+          <Typography variant="body1" gutterBottom sx={{ fontSize: '1.2rem'}}>
             {aboutText}
           </Typography>
         </Box>
+        <div className='my-4'>
+            <EmailListButton variant="h5" invert={true} />
+        </div>
       </div>
     </div>
   )

@@ -170,11 +170,11 @@ export default function Page() {
 
   return (
     isAuthenticated ? (
-      <div className="container mt-28 d-flex flex-col gap-5 dashboard">
-        <h1 className="display-1 text-center text-white">Admin Dashboard</h1>
+      <div className="container mt-5 d-flex flex-col gap-4 dashboard">
+        <h1 className="display-1 text-center ">Admin Dashboard</h1>
         <Form onSubmit={uploadVideo} className='mt-5'>
           <Form.Group className="mb-3" controlId="youtubeLink">
-            <Form.Label className='text-white'>Youtube Link</Form.Label>
+            <Form.Label >Youtube Link</Form.Label>
             <Form.Control
               type="text"
               placeholder="Ex: https://youtu.be/Anm8cU7ZR8g or https://www.youtube.com/watch?v=Anm8cU7ZR8g" />
@@ -188,7 +188,7 @@ export default function Page() {
         </Form>
 
         <Form.Group className="mt-5">
-          <Form.Label className='text-white'>Select Photos to Upload (10 MB Limit)</Form.Label>
+          <Form.Label >Select Photos to Upload (10 MB Limit)</Form.Label>
           <Form.Control
             type="file"
             multiple  // Allow multiple file selection
@@ -198,7 +198,7 @@ export default function Page() {
         </Form.Group>
 
         {isUploading && (
-          <div className="mt-3 text-white">
+          <div className="mt-3 ">
             <Spinner animation="border" role="status">
               <span className="sr-only">Uploading...</span>
             </Spinner>
@@ -208,10 +208,9 @@ export default function Page() {
 
         {aboutContent && (
           <>
-            <Typography variant="h3" className="text-white">About</Typography>
+            <Typography variant="h3" className="">About</Typography>
             <TextField
               id="outlined-multiline-static"
-              label="Multiline"
               multiline
               rows={10}
               value={aboutContent}
@@ -226,7 +225,7 @@ export default function Page() {
         )}
 
         {managementLoading ? (
-          <div className="mt-3 text-white d-flex align-items-center">
+          <div className="mt-3  d-flex align-items-center">
             <Spinner animation="border" role="status" className="me-2">
               <span className="sr-only">Loading...</span>
             </Spinner>
@@ -239,12 +238,12 @@ export default function Page() {
         ) : (
           Object.keys(managementContent).length > 0 && (
             <>
-              <Typography variant="h3" className="text-white">Management</Typography>
+              <Typography variant="h3" className="">Management</Typography>
               {Object.keys(managementContent).map((managementType) => (
                 <div key={managementType} className="mb-5">
-                  <Typography variant="h4" className="text-white">{managementType}</Typography>
+                  <Typography variant="h4" className="">{managementType}</Typography>
                   <Form.Group className="mb-3" controlId={`agency-${managementType}`}>
-                    <Form.Label className='text-white'>Agency</Form.Label>
+                    <Form.Label >Agency</Form.Label>
                     <Form.Control
                       type="text"
                       placeholder="Enter Agency Name"
@@ -253,7 +252,7 @@ export default function Page() {
                     />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId={`agent-${managementType}`}>
-                    <Form.Label className='text-white'>Agent(s)</Form.Label>
+                    <Form.Label >Agent(s)</Form.Label>
                     <Form.Control
                       type="text"
                       placeholder="Enter Agents, separated by commas"
@@ -265,7 +264,7 @@ export default function Page() {
                     />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId={`agent_contact-${managementType}`}>
-                    <Form.Label className='text-white'>Agent Contact(s)</Form.Label>
+                    <Form.Label >Agent Contact(s)</Form.Label>
                     <Form.Control
                       type="text"
                       placeholder="Enter Agent Contacts, separated by commas"
@@ -280,7 +279,7 @@ export default function Page() {
               ))}
               <Button
                 variant="primary"
-                className="mt-3 align-self-baseline"
+                className="mb-3 align-self-baseline"
                 onClick={() => saveManagementText()}
               >Save Management</Button>
             </>
@@ -302,7 +301,7 @@ export default function Page() {
       </div>
     ) :
       (
-        <Typography variant="h3" className="text-white">Checking authorization...</Typography>
+        <Typography variant="h3" className="">Checking authorization...</Typography>
       )
   );
 }

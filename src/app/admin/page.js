@@ -36,9 +36,9 @@ export default function Page() {
 
   return (
     <div className="container mt-5">
-      <Typography variant="h3" className="text-white">Admin Login</Typography>
+      <Typography variant="h3">Admin Login</Typography>
       <Form onSubmit={handleSubmit}>
-        <Form.Group className="text-white mb-3">
+        <Form.Group className="mb-3">
           <Form.Label htmlFor="password" className="form-label">
             Password
           </Form.Label>
@@ -50,7 +50,7 @@ export default function Page() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <Button type="submit" className="btn btn-primary">
+          <Button type="submit" className="btn btn-primary mt-3">
             Login
           </Button>
         </Form.Group>

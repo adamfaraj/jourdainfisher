@@ -86,7 +86,7 @@ export default function Contact() {
             <div className='my-4'>
                 <EmailListButton variant="h5" />
             </div>
-            <Typography variant="h1">
+            <Typography className='mt-3' variant="h1">
                 Contact
             </Typography>
 

@@ -9,3 +9,16 @@
   background-color: black;
   color: #ffa8a8;
 }
+
+.email-list-container a.MuiLink-root.invertColors {
+  background-color: black;
+  border-radius: 5px;
+  color: #ffa8a8;
+  transition: all 0.15s ease-in-out;
+}
+
+.email-list-container a.MuiLink-root.invertColors:hover {
+  color: black;
+  background-color: #ffa8a8;
+  border: 1px solid black;
+}
