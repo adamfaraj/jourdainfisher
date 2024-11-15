@@ -3,11 +3,12 @@
 import React, {useState, useEffect} from 'react';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { useMediaQuery } from '@mui/material';
 import './Photos.css';
 
 export default function Photos() {
     const [photos, setPhotos] = useState(null)
+    const isMobile = useMediaQuery('(max-width:768px)'); // Check if screen width is <= 600px
 
     useEffect(() => {
         console.log('test')
@@ -24,9 +25,8 @@ export default function Photos() {
             <h1 className="display-1 text-center">Photos</h1>
             <ImageList
                 className="p-8"
-                cols={3} 
+                cols={isMobile ? 1 : 3}
                 gap={12}
-                // rowHeight={164}
                 sx={{ 
                     width: '100%',
                     maxWidth: 1200,
