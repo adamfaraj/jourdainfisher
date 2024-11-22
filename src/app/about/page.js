@@ -50,8 +50,8 @@ export default function Page() {
       {/* Parallax Image Section */}
       <ParallaxImage
         src="https://d1o0ev2mj1bytm.cloudfront.net/images/about.jpg"
-        height="500px"
-        objectPosition="top"
+        height="600px"
+        objectPosition="10%"
         speed={0.5} // Adjust the speed as needed
         alt="Jourdain Fisher performing on stage"
       />
